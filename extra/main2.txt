@@ -1,0 +1,54 @@
+package main
+
+import (
+	"strconv"
+
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/widget"
+)
+
+func main() {
+	myApp := app.New()
+	myWindow := myApp.NewWindow("Fyne counter example")
+
+	count := 0
+
+	// Create the text field for displaying the number
+	txtNumber := widget.NewEntry()
+	txtNumber.SetText("0")
+	txtNumber.Resize(fyne.NewSize(100, txtNumber.MinSize().Height))
+	txtNumber.Disable() // Make it read-only like the Flet example
+
+	updateText := func() {
+		txtNumber.SetText(strconv.Itoa(count))
+	}
+
+	// Create the minus button
+	minusButton := widget.NewButton("-", func() {
+		count--
+		updateText()
+	})
+
+	// Create the plus button
+	plusButton := widget.NewButton("+", func() {
+		count++
+		updateText()
+	})
+
+	// Create a centered row using a center layout
+	content := container.NewHBox(
+		minusButton,
+		txtNumber,
+		plusButton,
+	)
+
+	// Center the content in the window
+	centered := container.New(layout.NewCenterLayout(), content)
+
+	myWindow.SetContent(centered)
+	myWindow.Resize(fyne.NewSize(300, 200))
+	myWindow.ShowAndRun()
+}
