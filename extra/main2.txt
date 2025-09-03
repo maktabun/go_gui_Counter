@@ -16,10 +16,11 @@ func main() {
 
 	count := 0
 
-	// Use a label instead for better text alignment control
-	txtNumber := widget.NewLabel("0")
-	txtNumber.Alignment = fyne.TextAlignTrailing // This works for Label!
+	// Create the text field for displaying the number
+	txtNumber := widget.NewEntry()
+	txtNumber.SetText("0")
 	txtNumber.Resize(fyne.NewSize(100, txtNumber.MinSize().Height))
+	txtNumber.Disable() // Make it read-only like the Flet example
 
 	updateText := func() {
 		txtNumber.SetText(strconv.Itoa(count))
@@ -37,7 +38,7 @@ func main() {
 		updateText()
 	})
 
-	// Create a centered row
+	// Create a centered row using a center layout
 	content := container.NewHBox(
 		minusButton,
 		txtNumber,
