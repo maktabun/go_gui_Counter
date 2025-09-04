@@ -11,8 +11,6 @@ import (
 )
 
 func main() {
-	myApp := app.New()
-	myWindow := myApp.NewWindow("Fyne counter example")
 
 	count := 0
 
@@ -43,6 +41,9 @@ func main() {
 		txtNumber,
 		plusButton,
 	)
+
+	myApp := app.New()
+	myWindow := myApp.NewWindow("Fyne counter example")
 
 	// Center the content in the window
 	centered := container.New(layout.NewCenterLayout(), content)
