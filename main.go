@@ -11,13 +11,15 @@ import (
 )
 
 func main() {
+	myApp := app.New()
+	myWindow := myApp.NewWindow("Fyne counter example")
 
 	count := 0
 
 	// Use a label instead for better text alignment control
 	txtNumber := widget.NewLabel("0")
 	txtNumber.Alignment = fyne.TextAlignTrailing // This works for Label!
-	txtNumber.Resize(fyne.NewSize(100, txtNumber.MinSize().Height))
+	txtNumber.Resize(fyne.NewSize(200, txtNumber.MinSize().Height))
 
 	updateText := func() {
 		txtNumber.SetText(strconv.Itoa(count))
@@ -41,9 +43,6 @@ func main() {
 		txtNumber,
 		plusButton,
 	)
-
-	myApp := app.New()
-	myWindow := myApp.NewWindow("Fyne counter example")
 
 	// Center the content in the window
 	centered := container.New(layout.NewCenterLayout(), content)
